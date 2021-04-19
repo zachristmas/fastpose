@@ -1,4 +1,6 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 from src.system.pose_2d.interface import Pose2DInterface
 from src.system.pose_3d.interface import Pose3DInterface
 from src.system.object_detection.interface import YoloInterface

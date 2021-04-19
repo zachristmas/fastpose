@@ -15,14 +15,13 @@ run on localhost:7575 (last line)
 
 <head>
 <meta charset="utf-8">
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://unpkg.com/d3-3d/build/d3-3d.min.js"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
 
 </head>
 
-
+<script src="https://unpkg.com/d3-3d/build/d3-3d.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <body>
 
 <style type="text/css">
@@ -60,14 +59,14 @@ run on localhost:7575 (last line)
 
 
 <div class="svgWrapper" >
-    <svg class="plot3d" width="100%" height="100%" viewBox="0 0 100 100"></svg>
+    <svg class="plot3d" width="150%" height="150%" viewBox="0 0 150 150"></svg>
 </div>
 
 
 
 <script>
 
-
+    var dataOut = [];
     var AudioInterface = new function(){
 
         this.wrapper = document.querySelector(".audioWrapper");

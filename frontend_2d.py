@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     print("start frontend")
 
-    port = "7575"
+    port = "8080"
 
     if len(argv) == 3:
         media = 0 if argv[1] == "webcam" else argv[1]

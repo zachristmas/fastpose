@@ -3,7 +3,7 @@ from sys import argv
 import numpy as np
 import cv2
 import time
-
+import json
 from src.system.interface import AnnotatorInterface
 
 
@@ -29,12 +29,11 @@ ssh -i ~/.ssh/server_private_key -f user@ip -L port_frontend:localhost:port_back
 """
 
 
+jsonOut = []
 
 class PoseApiHttpHandler(BaseHTTPRequestHandler):
 
     annotator = None
-
-
 
     def do_GET(self):
 
@@ -43,7 +42,6 @@ class PoseApiHttpHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(PoseApiHttpHandler.annotator.jsonify().encode("utf8"))
-
 
 
     def do_POST(self):
@@ -64,6 +62,7 @@ class PoseApiHttpHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(PoseApiHttpHandler.annotator.jsonify().encode("utf8"))
+        jsonOut.append(json.loads(PoseApiHttpHandler.annotator.jsonify()))
 
 
 
@@ -77,7 +76,14 @@ def run(port=7575, max_persons=2):
     httpd = HTTPServer(server_address, PoseApiHttpHandler)
     print('Ready to serve requests on localhost:' + str(port))
 
-    httpd.serve_forever()
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        with open('data.json', 'w', encoding='utf-8') as f:
+            json.dump(jsonOut, f, ensure_ascii=False, indent=4)
+        httpd.server_close()
+
+        pass
 
 
 

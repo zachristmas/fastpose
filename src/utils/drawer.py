@@ -136,7 +136,7 @@ class Drawer:
 
             # Draw the skeleton
             img = Drawer.draw_2d_pose(img, poses_2d[pid])
-
+            
             # The person id is written on the gravity center
 
             tmp = poses_2d[pid].get_gravity_center()

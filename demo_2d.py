@@ -5,7 +5,7 @@ from src.utils.drawer import Drawer
 import time
 from sys import argv
 
-
+import json
 
 """
 Read the movie located at moviePath, perform the 2d pose annotation and display
@@ -38,8 +38,8 @@ def start(movie_path, max_persons):
         poses = [p['pose_2d'] for p in persons]
 
         ids = [p['id'] for p in persons]
-        frame = Drawer.draw_scene(frame, poses, ids, fps, cap.get(cv2.CAP_PROP_POS_FRAMES))
 
+        frame = Drawer.draw_scene(frame, poses, ids, fps, cap.get(cv2.CAP_PROP_POS_FRAMES))
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         cv2.imshow('frame', frame)
 
